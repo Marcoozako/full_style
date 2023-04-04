@@ -1,0 +1,22 @@
+
+<div class="container">
+  <div class="row">
+    <h1>List your accommodation on Rent House </h1>
+  </div>
+
+  <div class='row'>
+    <p> With Rent House <strong>everything</strong> is done so that you can rent your house with <strong>respect</strong> and <strong>protect</strong> you against damage !! </p>
+  </div>
+
+  <div class="row">
+  <%= simple_form_for @flat do |n| %>
+    <%= n.input :city %>
+    <%= n.input :address %>
+    <%= n.input :gears, :collection => %w(cuisine salon chambre) %>
+    <%= n.input :description,  :input_html => { :rows => 8 } %>
+    <%= n.input :price %>
+    <%= n.input :photos, as: :file, input_html: { multiple: true } %>
+    <%= n.submit %>
+  <% end %>
+  </div>
+</div>

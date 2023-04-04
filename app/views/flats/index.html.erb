@@ -1,0 +1,12 @@
+<div class="category-choice">
+  <div class="card">
+    <% @flats.each do |flat| %>
+      <% flat.photos.each do |photo| %>
+        <%= image_tag photo.key, height: 240, width: 350, crop: :fill %>
+      <% end %>
+      <p><strong><%= flat.city %></strong></p>
+      <%= flat.user.nickname %>
+      <p class='text-align-start'><strong><%= flat.price %> €</strong> par nuit</p>
+    <% end %>
+  </div>
+</div>
