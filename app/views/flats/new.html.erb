@@ -15,7 +15,7 @@
     <%= n.input :gears, :collection => %w(cuisine salon chambre) %>
     <%= n.input :description,  :input_html => { :rows => 8 } %>
     <%= n.input :price %>
-    <%= n.input :photos, as: :file, input_html: { multiple: true } %>
+    <%= n.input :photo, as: :file %>
     <%= n.submit %>
   <% end %>
   </div>

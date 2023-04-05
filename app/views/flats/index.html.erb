@@ -1,8 +1,10 @@
 <div class="category-choice">
   <div class="card">
     <% @flats.each do |flat| %>
-      <% flat.photos.each do |photo| %>
-        <%= image_tag photo.key, height: 240, width: 350, crop: :fill %>
+      <% if flat.photo.attached? %>
+          <%= image_tag flat.photo.key, :width=>180, :height=>200, crop: :fill %>
+      <% else %>
+          <%= 'No Image' %>
       <% end %>
       <p><strong><%= flat.city %></strong></p>
       <%= flat.user.nickname %>

@@ -1,7 +1,7 @@
 class Flat < ApplicationRecord
   belongs_to :user
   has_many :bookings
-  has_many_attached :photos
+  has_one_attached :photo
   validates :city, presence: true
   validates :address, presence: true
   validates :description, length: { minimum: 20, too_short: "20 caractères au minimum" }

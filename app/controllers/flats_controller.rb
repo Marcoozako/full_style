@@ -18,7 +18,7 @@ class FlatsController < ApplicationController
     # raise
     @flat.user_id = current_user.id
     if @flat.save
-      redirect_to flat_path(@path)
+      redirect_to flat_path(@flat)
     else
       render :new, status: :unprocessable_entity
     end
@@ -40,6 +40,6 @@ class FlatsController < ApplicationController
   end
 
   def permit
-    params.require(:flat).permit(:city, :address, :description, :price, :gears, :user_id, photos: [])
+    params.require(:flat).permit(:city, :address, :description, :price, :gears, :user_id, :photo)
   end
 end
