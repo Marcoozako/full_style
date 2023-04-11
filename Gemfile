@@ -47,7 +47,7 @@ gem "sassc-rails"
 
 # Use Active Storage variants [https://guides.rubyonrails.org/active_storage_overview.html#transforming-images]
 # gem "image_processing", "~> 1.2"
-
+gem "cloudinary"
 gem "devise"
 gem "autoprefixer-rails"
 gem "font-awesome-sass", "~> 6.1"
@@ -58,7 +58,7 @@ group :development, :test do
   gem "dotenv-rails"
 
 end
-
+gem "dotenv-rails", groups: [:development, :test]
 group :development do
   # Use console on exceptions pages [https://github.com/rails/web-console]
   gem "web-console"

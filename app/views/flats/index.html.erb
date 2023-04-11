@@ -1,0 +1,14 @@
+<div class="category-choice">
+  <div class="card">
+    <% @flats.each do |flat| %>
+      <% if flat.photo.attached? %>
+          <%= image_tag flat.photo.key, :width=>180, :height=>200, crop: :fill %>
+      <% else %>
+          <%= 'No Image' %>
+      <% end %>
+      <p><strong><%= flat.city %></strong></p>
+      <%= flat.user.nickname %>
+      <p class='text-align-start'><strong><%= flat.price %> €</strong> par nuit</p>
+    <% end %>
+  </div>
+</div>
