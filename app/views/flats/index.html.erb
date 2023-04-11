@@ -1,14 +1,21 @@
-<div class="category-choice">
-  <div class="card">
+<div class="container">
+  <div class="row">
     <% @flats.each do |flat| %>
-      <% if flat.photo.attached? %>
-          <%= image_tag flat.photo.key, :width=>180, :height=>200, crop: :fill %>
-      <% else %>
-          <%= 'No Image' %>
-      <% end %>
-      <p><strong><%= flat.city %></strong></p>
-      <%= flat.user.nickname %>
-      <p class='text-align-start'><strong><%= flat.price %> €</strong> par nuit</p>
+    <div class="col-sm-4">
+      <div class="card mt-5">
+          <% if flat.photo.attached? %>
+              <%= cl_image_tag flat.photo.key, :width=>300, :height=>250, crop: :fill, class:'card-img-top' %>
+          <% else %>
+              <%= 'No Image' %>
+          <% end %>
+        <div class="card-body">
+          <p class='card-title'><strong><%= flat.city  %> , <%=  flat.address %></strong></p>
+          <p class='no-margin'> Hôte : <%= flat.user.nickname %></p>
+          <p class='text-align-start card-text'><strong><%= flat.price %> €</strong> par nuit</p>
+          <p><%= link_to 'Détail ->', flat_path(flat.id), class:'btn btn-primary' %></p>
+        </div>
+      </div>
+    </div>
     <% end %>
   </div>
 </div>

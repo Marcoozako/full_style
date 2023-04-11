@@ -1,0 +1,32 @@
+.card-img-top {
+  object-fit: fill;
+  border-radius: 10px 10px 1px 1px !important;
+}
+
+.card {
+  border-radius: 10px 10px 0px 0px;
+  border: none;
+}
+
+.no-margin{
+  margin-bottom: 8px;
+}
+
+.white-bg {
+  background-color: aliceblue;
+}
+
+.grid{
+  display: grid;
+  grid-template-columns: 2fr 1fr;
+  grid-gap: 10px;
+  // grid-auto-rows: minmax(100px, auto);
+}
+
+.card1{
+ background-color: bisque;
+}
+
+.card2{
+  background-color: aqua;
+}

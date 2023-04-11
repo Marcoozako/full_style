@@ -1,7 +1,7 @@
 class User < ApplicationRecord
 
-  has_many :flats, through: :bookings
-  has_many :flats
+  has_many :flats, through: :bookings, dependent: :destroy
+  has_many :flats, dependent: :destroy
   # Include default devise modules. Others available are:
   # :confirmable, :lockable, :timeoutable, :trackable and :omniauthable
   devise :database_authenticatable, :registerable,
