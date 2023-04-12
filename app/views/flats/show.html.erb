@@ -17,7 +17,7 @@
       <div class="card2">
         <div id='flat-booking-dates'>
           <% if current_user.id != @flat.user_id  %>
-            <%= simple_form_for [@flat, @booking], data: { controller: 'flatpickr' } do |n| %>
+            <%= simple_form_for [@flat, @booking], data: { controller: 'flatpickr', flatpickr_min_date: Time.zone.now } do |n| %>
               <p><%= n.input :begin_date, as: :string, required: false, input_html: { id: "range-start", value: @booking.begin_date.try(:strftime, '%B %d, %Y'), data: { flatpickr_target: "startTime" } } %></p>
               <p><%= n.input :end_date, as: :string, required: false, input_html:{ id: "range_end", data: { flatpickr_target: "endTime" } }, label: 'RETURN DATE' %></p>
               <p><%= n.input :number_of_guests %></p>
