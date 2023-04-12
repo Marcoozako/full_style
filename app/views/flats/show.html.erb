@@ -15,15 +15,11 @@
       </div>
 
       <div class="card2">
-        <div id='flat-booking-dates' data-unavailable="<%= @flat.unavailable_dates.to_json %>">
+        <div id='flat-booking-dates'>
           <% if current_user.id != @flat.user_id  %>
-            <%= simple_form_for ([@flat, @booking]) do |n| %>
-              <p><%= n.input :begin_date, as: :string,
-                    required: false,
-                    input_html: { id: "booking_begin_date"} %></p>
-              <p><%= n.input :end_date, as: :string,
-                    required: false,
-                    input_html: { id: "booking_end_date"} %></p>
+            <%= simple_form_for [@flat, @booking], data: { controller: 'flatpickr' } do |n| %>
+              <p><%= n.input :begin_date, as: :string, required: false, input_html: { id: "range-start", value: @booking.begin_date.try(:strftime, '%B %d, %Y'), data: { flatpickr_target: "startTime" } } %></p>
+              <p><%= n.input :end_date, as: :string, required: false, input_html:{ id: "range_end", data: { flatpickr_target: "endTime" } }, label: 'RETURN DATE' %></p>
               <p><%= n.input :number_of_guests %></p>
               <p><%= n.button :submit, 'Book here', class: 'btn btn-primary' %></p>
             <% end %>
@@ -31,9 +27,8 @@
       </div>
     </div>
 
-
-<div id="booking-form-div"
-     data-bookings="<%= @bookings_dates.to_json %>">
-</div>
- <%# # controller: "flatpickr",
-          # flatpickr_min_date: Time.zone.now #disables past dates %>
+<%#= simple_form_for [@car, @booking], data: { controller: 'flatpickr' } do |f| %>
+         <%#= f.input :starts_at, as: :string, required: false, input_html: { id: "range_start", value: @booking.starts_at.try(:strftime, '%B %d, %Y'), data: { flatpickr_target: "startTime" } } %>
+          <%#= f.input :ends_at, as: :string, required: false, input_html: { id: "range_end", data: { flatpickr_target: "endTime" } }, label: 'RETURN DATE' %>
+          <%#= f.submit 'Book now', class: 'btn-ghost-index' %>
+        <%# end %>

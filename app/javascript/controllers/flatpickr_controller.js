@@ -1,44 +1,26 @@
-// import { Controller } from '@hotwired/stimulus'
-// import flatpickr from "flatpickr";
-// import rangePlugin from "flatpickr/dist/plugins/rangePlugin";
-
-// // import a theme (could be in your main CSS entry too...)
-// import "flatpickr/dist/themes/dark.css";
-
-// // import the translation files and create a translation mapping
-// import { French } from "flatpickr/dist/l10n/fr.js";
-// import { english } from "flatpickr/dist/l10n/default.js";
-
-// // create a new Stimulus controller by extending stimulus-flatpickr wrapper controller
-// export default class extends Controller {
-//   static targets = ['startTime', 'EndTime'];
-//   locales = {
-//     fr: French,
-//     en: english
-//   };
-
-//   connect() {
-//     //define locale and global flatpickr settings for all datepickers
-//     this.config = {
-//       locale: this.locale,
-//       altInput: true,
-//       showMonths: 2
-//     };
-
-//     super.connect();
-//   }
-
-//   // automatically submit form when a date is selected
-//   change(selectedDates, dateStr, instance) {
-//     const form = this.element.closest("form");
-//     Rails.fire(form, "submit");
-//   }
-
-//   get locale() {
-//     if (this.locales && this.data.has("locale")) {
-//       return this.locales[this.data.get("locale")];
-//     } else {
-//       return "";
-//     }
-//   }
-// }
+import { Controller } from '@hotwired/stimulus';
+import flatpickr from 'flatpickr';
+import rangePlugin from 'flatpickr/dist/plugins/rangePlugin';
+export default class extends Controller {
+  static targets = ['startTime', 'endTime'];
+  connect() {
+    const config = {
+      altInput: true,
+      mode: 'range',
+      dateFormat: 'F j, Y',
+      plugins: [new rangePlugin({ input: this.endTimeTarget })],
+      onClose: (_, __, fp) => {
+        if (fp.selectedDates.length === 2) {
+          const startDate = fp.formatDate(fp.selectedDates[0], 'Y-m-d');
+          const endDate = fp.formatDate(fp.selectedDates[1], 'Y-m-d');
+          document.getElementById('range_start').value = startDate;
+          document.getElementById('range_end').value = fp.formatDate(
+            fp.selectedDates[1],
+            'F j, Y'
+          );
+        }
+      },
+    };
+    flatpickr(this.startTimeTarget, config);
+  }
+}
