@@ -1,0 +1,13 @@
+<div class="container">
+  <div class="row">
+    <%= simple_form_for @flat do |n| %>
+      <%= n.input :city %>
+      <%= n.input :address %>
+      <%= n.input :gears, :collection => %w(cuisine salon chambre) %>
+      <%= n.input :description,  :input_html => { :rows => 8 } %>
+      <%= n.input :price %>
+      <%= n.input :photo, as: :file %>
+      <%= n.submit %>
+    <% end %>
+  </div>
+</div>

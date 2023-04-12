@@ -1,1 +1,34 @@
 <h2>Et coucou</h2>
+    <div class="grid">
+      <div class="card1">
+        <p><strong><%= @flat.user.nickname %></strong></p>
+
+        <p><%= cl_image_tag @flat.photo.key, :width=>300, :height=>250, crop: :fill %></p>
+        <p><%= @flat.city %></p>
+        <p><%= @flat.address %></p>
+
+        <p><%= link_to 'Booking', new_flat_booking_path(@flat.id), class:'btn btn-primary' %></p>
+
+        <%= link_to 'Update', edit_flat_path(@flat.id) %>
+
+        <p><%= link_to 'Delete', flat_path(@flat.id), data: {turbo_method: :delete, turbo_confirm: 'Are You Sure ??'} %></p>
+      </div>
+
+      <div class="card2">
+        <div id='flat-booking-dates'>
+          <% if current_user.id != @flat.user_id  %>
+            <%= simple_form_for [@flat, @booking], data: { controller: 'flatpickr' } do |n| %>
+              <p><%= n.input :begin_date, as: :string, required: false, input_html: { id: "range-start", value: @booking.begin_date.try(:strftime, '%B %d, %Y'), data: { flatpickr_target: "startTime" } } %></p>
+              <p><%= n.input :end_date, as: :string, required: false, input_html:{ id: "range_end", data: { flatpickr_target: "endTime" } }, label: 'RETURN DATE' %></p>
+              <p><%= n.input :number_of_guests %></p>
+              <p><%= n.button :submit, 'Book here', class: 'btn btn-primary' %></p>
+            <% end %>
+          <% end %>
+      </div>
+    </div>
+
+<%#= simple_form_for [@car, @booking], data: { controller: 'flatpickr' } do |f| %>
+         <%#= f.input :starts_at, as: :string, required: false, input_html: { id: "range_start", value: @booking.starts_at.try(:strftime, '%B %d, %Y'), data: { flatpickr_target: "startTime" } } %>
+          <%#= f.input :ends_at, as: :string, required: false, input_html: { id: "range_end", data: { flatpickr_target: "endTime" } }, label: 'RETURN DATE' %>
+          <%#= f.submit 'Book now', class: 'btn-ghost-index' %>
+        <%# end %>
